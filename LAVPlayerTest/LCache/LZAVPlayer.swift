@@ -3,7 +3,7 @@
 //  LAVPlayerTest
 //
 //  Created by LiZhi荔枝 on 2021/6/28.
-//  个人主页：https://www.jianshu.com/u/2dc174d83679
+//
 
 import Foundation
 import AVFoundation
@@ -11,10 +11,10 @@ import AVFoundation
 class LZAVPlayer: NSObject {
     /// 视频地址
     var mediaUrl: String!
-    /// 真正的播放器实例
-    var realPlayer: AVPlayer?
+    /// 播放器实例
+    var player: AVPlayer?
     /// 边下边播的代理
-    var resourceLoader: LZResourceLoader?
+    var videoResourceLoader: LZResourceLoader?
     
     init(withURL url: String?){
         super.init()
@@ -31,17 +31,17 @@ class LZAVPlayer: NSObject {
         component.scheme = "LZStream"
         let streamUrl: URL = component.url!
         let urlAssrt = AVURLAsset(url: streamUrl)
-        resourceLoader = LZResourceLoader(originalURL: url)
+        videoResourceLoader = LZResourceLoader(originalURL: url,streamSchemeURL: streamUrl)
 
-        guard let resourceLoader = resourceLoader else {
+        guard let resourceLoader = videoResourceLoader else {
             return
         }
-        urlAssrt.resourceLoader.setDelegate(resourceLoader, queue: resourceLoader.resourceLoaderQueue)
+        urlAssrt.resourceLoader.setDelegate(videoResourceLoader, queue: resourceLoader.resourceLoaderQueue)
        let playerItem = AVPlayerItem(asset: urlAssrt)
-        if realPlayer == nil {
-            realPlayer = AVPlayer(playerItem: playerItem)
+        if player == nil {
+            player = AVPlayer(playerItem: playerItem)
         } else {
-            realPlayer?.replaceCurrentItem(with: playerItem)
+            player?.replaceCurrentItem(with: playerItem)
         }
     }
     
@@ -49,7 +49,7 @@ class LZAVPlayer: NSObject {
 
 extension LZAVPlayer {
     public func play(){
-        self.realPlayer?.play()
+        self.player?.play()
     }
 }
 

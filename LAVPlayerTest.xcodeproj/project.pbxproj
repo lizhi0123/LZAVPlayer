@@ -15,9 +15,9 @@
 		0431B0D5268087E800118E7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0431B0D3268087E800118E7B /* LaunchScreen.storyboard */; };
 		0431B0E0268087E800118E7B /* LAVPlayerTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B0DF268087E800118E7B /* LAVPlayerTestTests.swift */; };
 		0431B0EB268087E800118E7B /* LAVPlayerTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B0EA268087E800118E7B /* LAVPlayerTestUITests.swift */; };
-		044A977C2689696F00178824 /* LZAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A977B2689696E00178824 /* LZAVPlayer.swift */; };
-		044A978126896BD000178824 /* LZResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A978026896BD000178824 /* LZResourceLoader.swift */; };
-		044A97832689705600178824 /* LZResourceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A97822689705600178824 /* LZResourceDownloader.swift */; };
+		CAB1E17B26B6BECA000009B3 /* LZAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */; };
+		CAB1E17C26B6BECA000009B3 /* LZResourceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */; };
+		CAB1E17D26B6BECA000009B3 /* LZResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +52,9 @@
 		0431B0E6268087E800118E7B /* LAVPlayerTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LAVPlayerTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0431B0EA268087E800118E7B /* LAVPlayerTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAVPlayerTestUITests.swift; sourceTree = "<group>"; };
 		0431B0EC268087E800118E7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		044A977B2689696E00178824 /* LZAVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LZAVPlayer.swift; sourceTree = "<group>"; };
-		044A978026896BD000178824 /* LZResourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LZResourceLoader.swift; sourceTree = "<group>"; };
-		044A97822689705600178824 /* LZResourceDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LZResourceDownloader.swift; sourceTree = "<group>"; };
+		CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZAVPlayer.swift; sourceTree = "<group>"; };
+		CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZResourceDownloader.swift; sourceTree = "<group>"; };
+		CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZResourceLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +138,9 @@
 		0431B1172681866900118E7B /* LCache */ = {
 			isa = PBXGroup;
 			children = (
-				044A977B2689696E00178824 /* LZAVPlayer.swift */,
-				044A978026896BD000178824 /* LZResourceLoader.swift */,
-				044A97822689705600178824 /* LZResourceDownloader.swift */,
+				CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */,
+				CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */,
+				CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */,
 			);
 			path = LCache;
 			sourceTree = "<group>";
@@ -276,11 +276,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0431B0CD268087E400118E7B /* ViewController.swift in Sources */,
-				044A978126896BD000178824 /* LZResourceLoader.swift in Sources */,
+				CAB1E17D26B6BECA000009B3 /* LZResourceLoader.swift in Sources */,
 				0431B0C9268087E400118E7B /* AppDelegate.swift in Sources */,
+				CAB1E17C26B6BECA000009B3 /* LZResourceDownloader.swift in Sources */,
+				CAB1E17B26B6BECA000009B3 /* LZAVPlayer.swift in Sources */,
 				0431B0CB268087E400118E7B /* SceneDelegate.swift in Sources */,
-				044A977C2689696F00178824 /* LZAVPlayer.swift in Sources */,
-				044A97832689705600178824 /* LZResourceDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
