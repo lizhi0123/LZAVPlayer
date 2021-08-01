@@ -3,6 +3,7 @@
 //  LAVPlayerTest
 //
 //  Created by LiZhi荔枝 on 2021/6/28.
+//  个人主页：https://www.jianshu.com/u/2dc174d83679
 //
 
 import Foundation
@@ -30,16 +31,11 @@ extension LZResourceLoader: AVAssetResourceLoaderDelegate {
      
     
     public func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-        guard let dataRequest = loadingRequest.dataRequest else {
-            return false
-        }
-
         // 启动下载任务，同时保留loadingRequest, progress 是 URLSession 响应数据的回调处理
         if  videoDownload == nil{
             videoDownload = LZResourceDownloader(originalUrl: originalURL)
         }
         
-//        videoDownload.startDownload(url: originalURL, loadingRequest: loadingRequest)
         print("--[shouldWait]-- loadRequest = \(loadingRequest)")
         videoDownload?.addDownload(loadingRequest: loadingRequest)
 
@@ -48,9 +44,7 @@ extension LZResourceLoader: AVAssetResourceLoaderDelegate {
     }
     
     public func resourceLoader(_ resourceLoader: AVAssetResourceLoader, didCancel loadingRequest: AVAssetResourceLoadingRequest) {
-//        objc_sync_enter(self)
         print("-- resourceLoader|didCancel")
         videoDownload?.removeDownload(loadingRequest: loadingRequest)
-//        objc_sync_exit(self)
     }
 }

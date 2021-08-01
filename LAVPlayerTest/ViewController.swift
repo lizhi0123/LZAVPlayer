@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        field.text = url5
+        field.text = url2
     }
     
     @IBAction func button2Click(_ sender: Any) {

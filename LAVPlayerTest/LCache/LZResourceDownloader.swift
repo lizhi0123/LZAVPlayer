@@ -2,8 +2,8 @@
 //  LVideoDownloadManager.swift
 //  LAVPlayerTest
 //
-//  Created by EDY on 2021/6/28.
-//
+//  Created by lizhi荔枝 on 2021/6/28.
+//  个人主页：https://www.jianshu.com/u/2dc174d83679
 
 import Foundation
 import AVFoundation
@@ -11,10 +11,6 @@ import  MobileCoreServices
 
 
 class LZResourceDownloader: NSObject {
-    //    static let shared = LZVideoDownload()
-    
-    /// 存放下载任务的字典
-    //    private lazy var urlTasks = [URL: VideoDownloadTask]()
     
     private var originalURL: URL
     private var session: URLSession!
@@ -44,37 +40,14 @@ class LZResourceDownloader: NSObject {
     /// 启动下载任务
     func addDownload(loadingRequest: AVAssetResourceLoadingRequest){
         self.loadingRequests.append(loadingRequest)
-        
-        guard let dataRequest = loadingRequest.dataRequest else {
-            return
-        }
         if self.isRunning {
             return
         }
         self.beginLoadResource(loadingRequest: loadingRequest)
-        
     }
     
     func removeDownload(loadingRequest: AVAssetResourceLoadingRequest)  {
         self.runningTask?.cancel()
-    }
-    
-    /// 创建下载URL请求
-    private func createURLRequest(url: URL, loadingRequest: AVAssetResourceLoadingRequest, cacheLength: Int) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        
-        if let dataRequest = loadingRequest.dataRequest {
-            let lowerBound = dataRequest.requestedOffset
-            //            if  lowerBound > 0{
-            let upperBound = lowerBound + Int64(dataRequest.requestedLength) - Int64( 1)
-            let rangeHeader = "bytes=\(lowerBound)-\(upperBound)"
-            print("--[rangeHeader] = \(rangeHeader)")
-            request.setValue(rangeHeader, forHTTPHeaderField: "Range")
-            //            }
-        }
-        
-        return request
     }
 }
 
@@ -118,7 +91,6 @@ extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
     
     //填充请求
     func fillInContentInformationRequest(_ loadingRestst:AVAssetResourceLoadingRequest,from response:URLResponse) {
-        //        self.queue.async {
         var contentLength = Int64(0)
         var isByteRangeAccessSupported = true
         var contentType: String = ""
@@ -152,8 +124,17 @@ extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
     
     func beginLoadResource(loadingRequest:AVAssetResourceLoadingRequest)  {
         self.isRunning = true
-        let newRequest = createURLRequest(url: self.originalURL, loadingRequest: loadingRequest, cacheLength: 0)
-        let dataTask = self.session.dataTask(with: newRequest)
+        var request = URLRequest(url: self.originalURL)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        
+        if let dataRequest = loadingRequest.dataRequest {
+            let lowerBound = dataRequest.requestedOffset
+            let upperBound = lowerBound + Int64(dataRequest.requestedLength) - Int64( 1)
+            let rangeHeader = "bytes=\(lowerBound)-\(upperBound)"
+            print("--[rangeHeader] = \(rangeHeader)")
+            request.setValue(rangeHeader, forHTTPHeaderField: "Range")
+        }
+        let dataTask = self.session.dataTask(with: request)
         dataTask.resume()
         self.runningTask = dataTask
     }
