@@ -31,7 +31,7 @@ class LZAVPlayer: NSObject {
         component.scheme = "LZStream"
         let streamUrl: URL = component.url!
         let urlAssrt = AVURLAsset(url: streamUrl)
-        videoResourceLoader = LZResourceLoader(originalURL: url,streamSchemeURL: streamUrl)
+        videoResourceLoader = LZResourceLoader(originalURL: url)
 
         guard let resourceLoader = videoResourceLoader else {
             return

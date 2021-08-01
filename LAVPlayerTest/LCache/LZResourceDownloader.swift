@@ -21,10 +21,10 @@ class LZResourceDownloader: NSObject {
     
     private var downloadQueue: DispatchQueue!
     //    private var requestTasks = [LZLoadingRequestTask]()
-    //    private var isRunning = false
+        private var isRunning = false
     //    private var runningIndex = -1;
-    private var runningLoadRequest: AVAssetResourceLoadingRequest?
     private var runningTask: URLSessionDataTask?
+    fileprivate lazy var loadingRequests = [AVAssetResourceLoadingRequest]()
     
     init(originalUrl: URL) {
         self.originalURL = originalUrl
@@ -43,20 +43,15 @@ class LZResourceDownloader: NSObject {
     
     /// 启动下载任务
     func addDownload(loadingRequest: AVAssetResourceLoadingRequest){
-        
-        self.runningLoadRequest = loadingRequest
+        self.loadingRequests.append(loadingRequest)
         
         guard let dataRequest = loadingRequest.dataRequest else {
             return
         }
-        let lowerBound = Int64(dataRequest.requestedOffset)
-        let requestedLength = dataRequest.requestedLength
-        //        let requestTest = URLRequest(url: URL(string: "http://www.baidu.com")!)
-        print("--[startDownload]-" + String(lowerBound) + "-requestedLength-" + String(requestedLength))
-        let newRequest = createURLRequest(url: self.originalURL, loadingRequest: loadingRequest, cacheLength: 0)
-        let dataTask = self.session.dataTask(with: newRequest)
-        dataTask.resume()
-        self.runningTask = dataTask
+        if self.isRunning {
+            return
+        }
+        self.beginLoadResource(loadingRequest: loadingRequest)
         
     }
     
@@ -81,71 +76,44 @@ class LZResourceDownloader: NSObject {
         
         return request
     }
-    
-    //    func writeContentInfo(response: URLResponse) {
-    //        //        contentInformationRequest?.isByteRangeAccessSupported = contentInfo.isByteRangeAccessSupported
-    //        //        contentInformationRequest?.contentLength = contentInfo.contentLength
-    //        //        contentInformationRequest?.contentType = contentInfo.contentType
-    //
-    //
-    //        guard let httpResponse = response as? HTTPURLResponse else {
-    //            return
-    //        }
-    //
-    //        var isByteRangeAccessSupported: Bool
-    //        var contentLength: Int64
-    //        var contentTypeStr: String
-    //
-    //        // 将headers的key都转换为小写
-    //        var headers = [String: Any]()
-    //
-    //        for key in httpResponse.allHeaderFields.keys {
-    //            let lowercased = (key as! String).lowercased()
-    //
-    //            headers[lowercased] = httpResponse.allHeaderFields[key]
-    //        }
-    //        isByteRangeAccessSupported = (headers["accept-ranges"] as? String) == "bytes"
-    //        if let rangeText = headers["content-range"] as? String, let lengthText = rangeText.split(separator: "/").last {
-    //            contentLength = Int64(lengthText)!
-    //        } else {
-    //            contentLength = httpResponse.expectedContentLength
-    //        }
-    //
-    //        if let mimeType = response.mimeType,
-    //           let contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, mimeType as CFString, nil)?.takeRetainedValue()
-    //        {
-    //            contentTypeStr = contentType as String
-    //        } else {
-    //            return
-    //        }
-    //    }
 }
 
 // MARK: - URLSessionDataDelegate
 extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
     /// 从响应请求头中获取视频文件总长度 contentLength
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        //        print("-- [response]=",response)
-        //        self.writeContentInfo(response: response)
-        //        self.fillInContentInformationRequest(self.loadingRequest.contentInformationRequest)
-        self.fillInContentInformationRequest(self.runningLoadRequest!, from: response)
+
+        if let loadingRequest = self.loadingRequests.first {
+            self.fillInContentInformationRequest(loadingRequest, from: response)
+        }
+        
         
         completionHandler(.allow)
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+//        print("--[didReceive data] count = ", data.count)
+        if let loadingRequest = self.loadingRequests.first {
+            loadingRequest.dataRequest?.respond(with: data)
+        }
         
-        self.runningLoadRequest!.dataRequest?.respond(with: data)
         
     }
     
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        print("--[urlSession] didCompleteWithError = ",error)
+        print("--[urlSession] didCompleteWithError ")
         if let _ =  error  {
-            self.runningLoadRequest?.finishLoading(with: error)
+            if let loadingRequest = self.loadingRequests.first {
+                loadingRequest.finishLoading(with: error)
+            }
+            
         }else {
-            runningLoadRequest?.finishLoading()
+            if let loadingRequest = self.loadingRequests.first {
+                loadingRequest.finishLoading()
+            }
         }
+        self.loadingRequests.removeFirst()
+        self.loadNextToLoadedResource()
     }
     
     //填充请求
@@ -180,6 +148,23 @@ extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
         loadingRestst.contentInformationRequest?.contentType = contentType
         loadingRestst.contentInformationRequest?.contentLength = contentLength
         loadingRestst.contentInformationRequest?.isByteRangeAccessSupported = isByteRangeAccessSupported
+    }
+    
+    func beginLoadResource(loadingRequest:AVAssetResourceLoadingRequest)  {
+        self.isRunning = true
+        let newRequest = createURLRequest(url: self.originalURL, loadingRequest: loadingRequest, cacheLength: 0)
+        let dataTask = self.session.dataTask(with: newRequest)
+        dataTask.resume()
+        self.runningTask = dataTask
+    }
+    
+    func loadNextToLoadedResource()  {
+        if  let lrequest = self.loadingRequests.first {
+            beginLoadResource(loadingRequest: lrequest)
+        }else {
+            self.isRunning = false
+            print("--资源空闲--")
+        }
     }
 }
 
