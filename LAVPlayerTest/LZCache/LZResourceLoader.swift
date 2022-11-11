@@ -11,7 +11,7 @@ import AVFoundation
 
 class LZResourceLoader: NSObject {
     /// 加载队列
-   public lazy var resourceLoaderQueue = DispatchQueue(label: "resourceLoaderQueue")
+   public lazy var resourceLoaderQueue = DispatchQueue(label: "LZ_resourceLoaderQueue")
     /// 原始url
   public  var originalURL: URL
     var videoDownload: LZResourceDownloader?
