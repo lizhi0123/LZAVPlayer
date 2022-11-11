@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+/// 文件处理
+class LZFileHandle {
+    
+}

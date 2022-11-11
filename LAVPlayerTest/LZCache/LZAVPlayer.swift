@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class LZAVPlayer: NSObject {
+open class LZAVPlayer: NSObject {
     /// 视频地址
     var mediaUrl: String!
     /// 播放器实例
@@ -20,11 +20,14 @@ class LZAVPlayer: NSObject {
     init(withURL url: String?){
         super.init()
         self.mediaUrl = url
-        preparePlayer()
+        preparePlayer(originalUrl: url)
     }
     
-    private func preparePlayer() {
-        guard let url = URL(string: mediaUrl) else {
+    private func preparePlayer(originalUrl:String?) {
+        guard let originalUrl = originalUrl,originalUrl.isEmpty == false else {
+            return
+        }
+        guard let url = URL(string: originalUrl) else {
             return
         }
         //下载

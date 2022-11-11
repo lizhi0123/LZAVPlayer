@@ -10,7 +10,7 @@ import AVFoundation
 import  MobileCoreServices
 
 
-class LZResourceDownloader: NSObject {
+open class LZResourceDownloader: NSObject {
     
     private var originalURL: URL
     private var session: URLSession!
@@ -29,7 +29,7 @@ class LZResourceDownloader: NSObject {
     }
     
     func prepare()  {
-        downloadQueue = DispatchQueue(label: "LVideoDownloadQueue")
+        downloadQueue = DispatchQueue(label: "LZVideoDownloadQueue")
         
         let opertionQueue = OperationQueue()
         opertionQueue.maxConcurrentOperationCount = 3
@@ -38,7 +38,7 @@ class LZResourceDownloader: NSObject {
     }
     
     /// 启动下载任务
-    func addDownload(loadingRequest: AVAssetResourceLoadingRequest){
+   open func addDownload(loadingRequest: AVAssetResourceLoadingRequest){
         self.loadingRequests.append(loadingRequest)
         if self.isRunning {
             return
@@ -46,7 +46,7 @@ class LZResourceDownloader: NSObject {
         self.beginLoadResource(loadingRequest: loadingRequest)
     }
     
-    func removeDownload(loadingRequest: AVAssetResourceLoadingRequest)  {
+    open func removeDownload(loadingRequest: AVAssetResourceLoadingRequest)  {
         self.runningTask?.cancel()
     }
 }
@@ -54,7 +54,7 @@ class LZResourceDownloader: NSObject {
 // MARK: - URLSessionDataDelegate
 extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
     /// 从响应请求头中获取视频文件总长度 contentLength
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
 
         if let loadingRequest = self.loadingRequests.first {
             self.fillInContentInformationRequest(loadingRequest, from: response)
@@ -64,7 +64,7 @@ extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
         completionHandler(.allow)
     }
     
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
 //        print("--[didReceive data] count = ", data.count)
         if let loadingRequest = self.loadingRequests.first {
             loadingRequest.dataRequest?.respond(with: data)
@@ -73,7 +73,7 @@ extension LZResourceDownloader: URLSessionDataDelegate,URLSessionTaskDelegate {
         
     }
     
-    func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         print("--[urlSession] didCompleteWithError ")
         if let _ =  error  {
             if let loadingRequest = self.loadingRequests.first {

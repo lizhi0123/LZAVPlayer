@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class LZResourceLoader: NSObject {
+open class LZResourceLoader: NSObject {
     /// 加载队列
    public lazy var resourceLoaderQueue = DispatchQueue(label: "LZ_resourceLoaderQueue")
     /// 原始url
