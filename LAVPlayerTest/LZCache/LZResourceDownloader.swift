@@ -74,6 +74,9 @@ extension LZResourceDownloader: URLSessionDataDelegate, URLSessionTaskDelegate {
         if let loadingRequest = self.loadingRequests.first {
             loadingRequest.dataRequest?.respond(with: data)
         }
+        
+        // TODO: <##>
+        fileHandle?.writeToCache(url: self.originalUrl, totalContentLength: Int(self.totalContentLength), lowerBound: Int(self.loadingRequests.first?.dataRequest?.lowerBound() ?? 0), upperBound: Int(self.loadingRequests.first?.dataRequest?.upperBound() ?? 0))
     }
     
     public func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

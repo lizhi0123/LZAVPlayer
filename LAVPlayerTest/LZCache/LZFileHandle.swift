@@ -17,7 +17,7 @@ import Foundation
 open class LZFileHandle {
     // TODO: <##>
     /// 往cache里写数据
-    open func writeToCache(url:String,lowerBound:Int,upperBound:Int){
+    open func writeToCache(url:String,totalContentLength:Int,lowerBound:Int,upperBound:Int){
         
     }
     // TODO: <##>
