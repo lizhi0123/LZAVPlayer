@@ -9,6 +9,10 @@
 import Foundation
 import AVFoundation
 
+/**
+ 通过 LZResourceLoader 转到下载，然后 在 区分用  FileHandle 取本地数据 还是 ResourceDownloader 下载数据;
+ ResourceDownloader 下载完成 ，通过 FileHandle 保存到本地
+ */
 open class LZAVPlayer: NSObject {
     /// 视频地址
     var mediaUrl: String!
@@ -35,7 +39,7 @@ open class LZAVPlayer: NSObject {
         component.scheme = "LZStream"
         let streamUrl: URL = component.url!
         let urlAssrt = AVURLAsset(url: streamUrl)
-        videoResourceLoader = LZResourceLoader(originalURL: url)
+        videoResourceLoader = LZResourceLoader(originalUrl: originalUrl)
 
         guard let resourceLoader = videoResourceLoader else {
             return

@@ -9,20 +9,28 @@
 import Foundation
 import AVFoundation
 
+/**
+ 通过 LZResourceLoader 转到下载，然后 在 区分用  FileHandle 取本地数据 还是 ResourceDownloader 下载数据
+ */
 open class LZResourceLoader: NSObject {
     /// 加载队列
    public lazy var resourceLoaderQueue = DispatchQueue(label: "LZ_resourceLoaderQueue")
     /// 原始url
-  public  var originalURL: URL
+  public  var originalUrl: String
     var videoDownload: LZResourceDownloader?
+    var fileHandle:LZFileHandle?
         
-    init(originalURL: URL) {
-        self.originalURL = originalURL
+    init(originalUrl: String) {
+        self.originalUrl = originalUrl
         
         super.init()
     }
     
     deinit {
+    }
+    
+    func setup()  {
+        fileHandle = LZFileHandle()
     }
 }
 
@@ -31,13 +39,22 @@ extension LZResourceLoader: AVAssetResourceLoaderDelegate {
      
     
     public func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-        // 启动下载任务，同时保留loadingRequest, progress 是 URLSession 响应数据的回调处理
-        if  videoDownload == nil{
-            videoDownload = LZResourceDownloader(originalUrl: originalURL)
+        
+        
+        let isCached =   self.fileHandle?.isCached(url: originalUrl, lowerBound: Int(loadingRequest.dataRequest?.lowerBound() ?? 0), upperBound: Int(loadingRequest.dataRequest?.upperBound() ?? 0)) ?? false
+        if isCached {
+            
+        }else {
+            // 启动下载任务，同时保留loadingRequest, progress 是 URLSession 响应数据的回调处理
+            if  videoDownload == nil{
+                videoDownload = LZResourceDownloader(originalUrl: originalUrl)
+            }
+            
+            print("--[shouldWait]-- loadRequest = \(loadingRequest)")
+            videoDownload?.addDownload(loadingRequest: loadingRequest)
         }
         
-        print("--[shouldWait]-- loadRequest = \(loadingRequest)")
-        videoDownload?.addDownload(loadingRequest: loadingRequest)
+       
 
         return true
         
@@ -45,6 +62,11 @@ extension LZResourceLoader: AVAssetResourceLoaderDelegate {
     
     public func resourceLoader(_ resourceLoader: AVAssetResourceLoader, didCancel loadingRequest: AVAssetResourceLoadingRequest) {
         print("-- resourceLoader|didCancel")
-        videoDownload?.removeDownload(loadingRequest: loadingRequest)
+        if false { //本地
+            
+        }else {
+            videoDownload?.removeDownload(loadingRequest: loadingRequest)
+        }
+       
     }
 }

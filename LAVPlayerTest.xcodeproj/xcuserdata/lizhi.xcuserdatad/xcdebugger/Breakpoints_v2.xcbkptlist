@@ -14,8 +14,8 @@
             filePath = "LAVPlayerTest/LZCache/LZResourceDownloader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "beginLoadResource(loadingRequest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "LAVPlayerTest/LZCache/LZResourceDownloader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "urlSession(_:dataTask:didReceive:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,9 +46,73 @@
             filePath = "LAVPlayerTest/LZCache/LZResourceDownloader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "urlSession(_:dataTask:didReceive:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AAA692F7-4510-4FBC-97AB-7CC9BD37C935 - 842db304f14fd7dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LAVPlayerTest.LZResourceDownloader.urlSession(_: __C.NSURLSession, dataTask: __C.NSURLSessionDataTask, didReceive: Foundation.Data) -&gt; ()"
+                  moduleName = "LAVPlayerTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lizhi/Desktop/LZCode/LZAVPlayer/LAVPlayerTest/LZCache/LZResourceDownloader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "AAA692F7-4510-4FBC-97AB-7CC9BD37C935 - 842db304f14fd7dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LAVPlayerTest.LZResourceDownloader.urlSession(_: __C.NSURLSession, dataTask: __C.NSURLSessionDataTask, didReceive: Foundation.Data) -&gt; ()"
+                  moduleName = "LAVPlayerTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lizhi/Desktop/LZCode/LZAVPlayer/LAVPlayerTest/LZCache/LZResourceDownloader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "188">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "007293C2-CC6B-4029-A129-6B4AFB8C2DFA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LAVPlayerTest/LZCache/LZResourceDownloader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "fillInContentInformationRequest(_:from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99775E5A-083A-4910-A9B5-E3434DEDD5F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LAVPlayerTest/LZCache/LZResourceDownloader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "fillInContentInformationRequest(_:from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

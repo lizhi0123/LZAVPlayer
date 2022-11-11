@@ -16,6 +16,7 @@
 		0431B0E0268087E800118E7B /* LAVPlayerTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B0DF268087E800118E7B /* LAVPlayerTestTests.swift */; };
 		0431B0EB268087E800118E7B /* LAVPlayerTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B0EA268087E800118E7B /* LAVPlayerTestUITests.swift */; };
 		6DFF5A13291E3150009A5AC1 /* LZFileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF5A12291E3150009A5AC1 /* LZFileHandle.swift */; };
+		6DFF5A16291E35C8009A5AC1 /* ResourceDataRequest+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF5A15291E35C8009A5AC1 /* ResourceDataRequest+extension.swift */; };
 		CAB1E17B26B6BECA000009B3 /* LZAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */; };
 		CAB1E17C26B6BECA000009B3 /* LZResourceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */; };
 		CAB1E17D26B6BECA000009B3 /* LZResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */; };
@@ -54,6 +55,7 @@
 		0431B0EA268087E800118E7B /* LAVPlayerTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAVPlayerTestUITests.swift; sourceTree = "<group>"; };
 		0431B0EC268087E800118E7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFF5A12291E3150009A5AC1 /* LZFileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LZFileHandle.swift; sourceTree = "<group>"; };
+		6DFF5A15291E35C8009A5AC1 /* ResourceDataRequest+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourceDataRequest+extension.swift"; sourceTree = "<group>"; };
 		CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZAVPlayer.swift; sourceTree = "<group>"; };
 		CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZResourceDownloader.swift; sourceTree = "<group>"; };
 		CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZResourceLoader.swift; sourceTree = "<group>"; };
@@ -140,12 +142,21 @@
 		0431B1172681866900118E7B /* LZCache */ = {
 			isa = PBXGroup;
 			children = (
+				6DFF5A14291E358F009A5AC1 /* Model */,
 				CAB1E17826B6BECA000009B3 /* LZAVPlayer.swift */,
 				CAB1E17A26B6BECA000009B3 /* LZResourceLoader.swift */,
 				CAB1E17926B6BECA000009B3 /* LZResourceDownloader.swift */,
 				6DFF5A12291E3150009A5AC1 /* LZFileHandle.swift */,
 			);
 			path = LZCache;
+			sourceTree = "<group>";
+		};
+		6DFF5A14291E358F009A5AC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6DFF5A15291E35C8009A5AC1 /* ResourceDataRequest+extension.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +296,7 @@
 				6DFF5A13291E3150009A5AC1 /* LZFileHandle.swift in Sources */,
 				CAB1E17B26B6BECA000009B3 /* LZAVPlayer.swift in Sources */,
 				0431B0CB268087E400118E7B /* SceneDelegate.swift in Sources */,
+				6DFF5A16291E35C8009A5AC1 /* ResourceDataRequest+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
