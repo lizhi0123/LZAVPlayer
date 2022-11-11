@@ -15,10 +15,13 @@ import Foundation
 
 /// 文件处理
 open class LZFileHandle {
+    
+    var fileHandle:FileHandle = FileHandle()
     // TODO: <##>
     /// 往cache里写数据
-    open func writeToCache(url:String,totalContentLength:Int,lowerBound:Int,upperBound:Int){
-        
+    open func writeToCache(data:Data,url:String,totalContentLength:Int,lowerBound:Int,upperBound:Int){
+        let key = url.lzMd5()
+        fileHandle.write(data)
     }
     // TODO: <##>
     /// 读取cache里的数据
